@@ -4,7 +4,7 @@ import pandas as pd
 from geopy import geocoders
 import matplotlib.pyplot as plt
 
-debug_mode = False
+debug_mode = True
 
 st.title('Tweeter Sentiment Analysis')
 
@@ -27,7 +27,14 @@ else:
         st.write(data)
 
     if st.checkbox('Sentiment Analysis'):
-        st.subheader('')
+        st.subheader('Positive Vs Negative')
+        data['text'] = general.cleaned(data['text'])
+        data['text'] = data['text'].apply(lambda x : general.remove_stopwords(x))
+        sentiments = pd.DataFrame(data = general.getSentiment(data['text']),columns = ['neg','neu','pos','comp'])
+        fig,ax = plt.subplots()
+        ax.bar(['+Ve','-Ve'],[sentiments['pos'][sentiments['pos']>0].shape[0],sentiments['neg'][sentiments['neg']>0].shape[0]],color=['#668cff','#ff5050'])
+        plt.title("NEGATIVE vs POSITIVE")
+        st.pyplot(fig)
 
     if st.checkbox('Location'):
         st.subheader('LocationWise Tweets')
