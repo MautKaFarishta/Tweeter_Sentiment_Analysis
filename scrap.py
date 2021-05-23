@@ -1,5 +1,6 @@
 import pandas as pd 
 import tweepy 
+import streamlit as st
 
 def printtweetdata(n, ith_tweet):
     print()
@@ -14,8 +15,11 @@ def printtweetdata(n, ith_tweet):
     print(f"Tweet Text:{ith_tweet[7]}")
     print(f"Hashtags Used:{ith_tweet[8]}")
   
-  
+@st.cache(suppress_st_warning=True)  
 def scrape(words, date_since, numtweet,api):
+
+    msg = st.text(f'Scraping Tweets for {words}')
+    prog = st.progress(0)
       
     db = pd.DataFrame(columns=['username', 'description', 'location', 'following',
                                'followers', 'totaltweets', 'retweetcount', 'text', 'hashtags'])
@@ -52,11 +56,14 @@ def scrape(words, date_since, numtweet,api):
           
         printtweetdata(i, ith_tweet)
         i = i+1
-    filename = 'scraped_tweets.csv'
+        prog.progress(i/(len(list_tweets)+2))
+    filename = '/Users/macbookpro/Desktop/Tweeter_Sentiment_Analysis/temp.csv'
       
-    # db.to_csv(filename)
+    db.to_csv(filename)
     print('Scraping has completed!')
-    return db
+    msg.empty()
+    prog.empty()
+    # return db
   
   
 def start(tag,date_since,numtweets):
