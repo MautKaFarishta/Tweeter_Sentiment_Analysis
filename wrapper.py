@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pydeck as pdk
 import drawings
+import scrapUser
 plt.xkcd()
 
 def runHashTagScrap(debug_mode):
@@ -61,4 +62,30 @@ def runHashTagScrap(debug_mode):
             drawings.drawMostLocations(15,data)
             drawings.drawMap(data)
 
+def getUserInfo():
+
+    user = st.text_input("Enter Username: ")
+
+    n_twts = st.number_input("How many tweets to Scrap : ",2)
+
+    
+    userData = pd.read_csv('/Users/macbookpro/Desktop/Tweeter_Sentiment_Analysis/UserTweets.csv')
+    
+    if userData['chk'][0]!=str(user)+str(n_twts):
+    
+        userData = scrapUser.start(user, n_twts)
+
+    usrAnalysis = st.selectbox('Select Analytics',
+        ['Show Raw Data','Overall Sentiment of user'])  
+
+    usrSentiments = pd.DataFrame(data = general.getSentiment(userData['text']),columns = ['neg','neu','pos','comp'])
+
+    uData = drawings.showUser(userData)
+
+    if usrAnalysis == 'Show Raw Data':
+        drawings.showUserData(uData)
+
+    elif usrAnalysis == 'Overall Sentiment of user':
+        drawings.drawUserSentiments(usrSentiments)
         
+    

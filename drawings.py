@@ -19,14 +19,13 @@ def drawWordsPerTweet(cleanData):
 
     ind = np.arange(len(word_dict))
     fig0,ax0 = plt.subplots()
-    plt.figure(figsize=(20,5))
     
     ax0.bar(ind, list(word_dict.values()))
 
+    # plt.xticks(ind, list(word_dict.keys()))
     plt.ylabel('Number of Tweets')
     plt.xlabel('Number of words in each Tweet')
     plt.title('WORDS PER TWEET')
-    plt.xticks(ind, list(word_dict.keys()))
     st.pyplot(fig0)
 
 def drawMostRetweeted(mst,data):
@@ -71,6 +70,41 @@ def drawMostLocations(most,data):
         plt.barh(lob_sorted.index[:most],lob_sorted.values[:most])
         plt.title("Locationwise Number of tweets")
         st.pyplot(fig1)
+
+st.cache(suppress_st_warning=True)
+def showUser(data):
+    name = data['username'][0]
+    acc_cre_date = data['acc_cre_date'][0]
+    foll = data['followers'][0]
+    id = data['user_id'][0]
+    st.markdown(f'Information for **{name}** and UserId : **{id}**')
+    st.text(f'Account created at: {acc_cre_date} with current followers {foll}')
+
+    return data[['created_at','text','tweet_id']]
+
+st.cache(suppress_st_warning=True)
+def showUserData(data):
+    st.write(data)
+
+st.cache(suppress_st_warning=True)
+def drawUserSentiments(sentiments): 
+    fig3, axes = plt.subplots()
+    sizes = [sentiments['comp'][sentiments['comp']>0].count(),sentiments['comp'][sentiments['comp']==0].count(),sentiments['comp'][sentiments['comp']<0].count()]
+    plt.pie(sizes,labels=['Positive','Neutral','Negative'],autopct='%1.1f%%', shadow=True)
+    plt.title('Sentiment Pie Chart')
+    st.pyplot(fig3)           
+    
+    fig1,ax = plt.subplots()
+    ax.bar(['Positive','Negative'],[sentiments['comp'][sentiments['comp']>0].shape[0],sentiments['comp'][sentiments['comp']<0].shape[0]],color=['#668cff','#ff5050'])
+    plt.title("NEGATIVE vs POSITIVE")
+    plt.ylabel('# of Tweets')
+    st.pyplot(fig1)
+
+    fig2, axes = plt.subplots(1, 2, figsize=(18, 10))
+    plt.suptitle('Distribution Of Index Scores',fontsize='xx-large')
+    sns.distplot(ax=axes[0], a=sentiments['pos'],color='b',axlabel = 'Positive Index').set_title('Positive')
+    sns.distplot(ax=axes[1], a=sentiments['neg'],color='r',axlabel = 'Negative Index').set_title('Negative')
+    st.pyplot(fig2)
 
 
 
