@@ -68,24 +68,29 @@ def getUserInfo():
 
     n_twts = st.number_input("How many tweets to Scrap : ",2)
 
-    
-    userData = pd.read_csv('/Users/macbookpro/Desktop/Tweeter_Sentiment_Analysis/UserTweets.csv')
-    
-    if userData['chk'][0]!=str(user)+str(n_twts):
-    
-        userData = scrapUser.start(user, n_twts)
+    if user:
+        userData = pd.read_csv('/Users/macbookpro/Desktop/Tweeter_Sentiment_Analysis/UserTweets.csv')
+        
+        if (userData.empty) or (userData['chk'][0]!=str(user)+str(n_twts)):
+        
+            userData = scrapUser.start(user, n_twts)
+            userData = pd.read_csv('/Users/macbookpro/Desktop/Tweeter_Sentiment_Analysis/UserTweets.csv')
 
-    usrAnalysis = st.selectbox('Select Analytics',
-        ['Show Raw Data','Overall Sentiment of user'])  
+        usrAnalysis = st.selectbox('Select Analytics',
+            ['Show Raw Data','Overall Sentiment of user'])  
 
-    usrSentiments = pd.DataFrame(data = general.getSentiment(userData['text']),columns = ['neg','neu','pos','comp'])
+        try:
+            usrSentiments = pd.DataFrame(data = general.getSentiment(userData['text']),columns = ['neg','neu','pos','comp'])
+        except:
+            st.write('Unexpected Error Try Again...')
+        uData = drawings.showUser(userData)
 
-    uData = drawings.showUser(userData)
+        if usrAnalysis == 'Show Raw Data':
+            drawings.showUserData(uData)
 
-    if usrAnalysis == 'Show Raw Data':
-        drawings.showUserData(uData)
-
-    elif usrAnalysis == 'Overall Sentiment of user':
-        drawings.drawUserSentiments(usrSentiments)
+        elif usrAnalysis == 'Overall Sentiment of user':
+            drawings.drawUserSentiments(usrSentiments)
+            drawings.drawUserWordCloud(uData)
+    else:pass
         
     

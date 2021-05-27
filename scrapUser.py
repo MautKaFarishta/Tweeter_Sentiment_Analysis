@@ -5,6 +5,9 @@ import streamlit as st
 
 st.cache(suppress_st_warning=False)
 def scrapUser(username,count,api):
+
+      count = min(100,count)
+
       dilog = st.text(f'Scrapping Tweets for {username}')
 
       # Creation of query method using parameters
