@@ -4,7 +4,7 @@ import wrapper
 def main():
     st.sidebar.title('Choose Action!')
     appMode = st.sidebar.selectbox('Select Mode',
-        ['Demo Mode','Analytics With Hashtag','Scrap For User'])
+        ['Demo Mode','Analytics With Hashtag','Scrap For User','Scrap Replies'])
 
     if appMode == "Demo Mode":
         st.sidebar.success('Demo Mode On !')
@@ -19,6 +19,10 @@ def main():
     elif appMode == "Scrap For User":
         st.sidebar.text('Scrap The Tweets for specific User.')
         wrapper.getUserInfo()
+
+    elif appMode == "Scrap Replies":
+        st.sidebar.text('Scrap The Replies for specific Tweet.')
+        wrapper.getReplies()
 
 if __name__ == "__main__":
     main()

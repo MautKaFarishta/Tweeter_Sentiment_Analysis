@@ -9,7 +9,7 @@ import pydeck as pdk
 import drawings
 import scrapUser
 import path as p
-plt.xkcd()
+import os
 
 def runHashTagScrap(debug_mode):
 
@@ -94,4 +94,16 @@ def getUserInfo():
             drawings.drawUserWordCloud(uData)
     else:pass
         
+def getReplies():
+    st.write('Enter URL of the Tweet.')
     
+    URL = st.text_input("Enter URL: ")
+
+    text_file = open(p.URL_path, "w")
+    n = text_file.write(URL)
+    text_file.close()
+
+    os.system(f"twitter-scrapper.py {URL}")
+
+    rplys = pd.read_csv(p.rply_path)
+    st.write(rplys)
