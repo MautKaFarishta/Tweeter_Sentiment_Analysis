@@ -103,7 +103,7 @@ def getReplies():
     n = text_file.write(URL)
     text_file.close()
 
-    os.system(f"twitter-scrapper.py {URL}")
+    os.system(p.rply_scrap_file)
 
     rplys = pd.read_csv(p.rply_path)
     st.write(rplys)
