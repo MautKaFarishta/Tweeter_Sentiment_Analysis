@@ -99,11 +99,13 @@ def getReplies():
     
     URL = st.text_input("Enter URL: ")
 
-    text_file = open(p.URL_path, "w")
-    n = text_file.write(URL)
-    text_file.close()
+    url = open(p.URL_path, "wt")
+    url.write(URL)
+    url.close()
 
-    os.system(p.rply_scrap_file)
+    cmd='python3 twitter-scraper.py -f url.txt'
+
+    os.system(cmd)
 
     rplys = pd.read_csv(p.rply_path)
     st.write(rplys)
