@@ -70,12 +70,12 @@ def getUserInfo():
     n_twts = st.number_input("How many tweets to Scrap : ",2)
 
     if user:
-        userData = pd.read_csv('/Users/macbookpro/Desktop/Tweeter_Sentiment_Analysis/UserTweets.csv')
+        userData = pd.read_csv(p.path2)
         
         if (userData.empty) or (userData['chk'][0]!=str(user)+str(n_twts)):
         
             userData = scrapUser.start(user, n_twts)
-            userData = pd.read_csv('/Users/macbookpro/Desktop/Tweeter_Sentiment_Analysis/UserTweets.csv')
+            userData = pd.read_csv(p.path2)
 
         usrAnalysis = st.selectbox('Select Analytics',
             ['Show Raw Data','Overall Sentiment of user'])  
