@@ -1,1 +1,6 @@
 path.py
+temp.csv
+UserTweets.csv
+scraped_tweets.csv
+__pycache__
+

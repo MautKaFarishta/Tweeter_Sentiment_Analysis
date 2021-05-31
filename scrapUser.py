@@ -2,6 +2,7 @@ import tweepy
 import time
 import pandas as pd
 import streamlit as st
+import path as p
 
 st.cache(suppress_st_warning=False)
 def scrapUser(username,count,api):
@@ -20,7 +21,7 @@ def scrapUser(username,count,api):
 
       tweets_df['chk'] =str(username)+str(count)
 
-      filename = '/Users/macbookpro/Desktop/Tweeter_Sentiment_Analysis/UserTweets.csv'
+      filename = p.path2
 
       tweets_df.to_csv(filename)
       dilog.empty()

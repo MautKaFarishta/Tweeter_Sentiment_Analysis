@@ -8,6 +8,7 @@ import seaborn as sns
 import pydeck as pdk
 import drawings
 import scrapUser
+import path as p
 plt.xkcd()
 
 def runHashTagScrap(debug_mode):
@@ -20,7 +21,7 @@ def runHashTagScrap(debug_mode):
     if debug_mode == True:
         st.text('WebApp in DEMO MODE.\nShowing Data for #DogeToTheMoon')
         tag = 'DogeToTheMoon'
-        data = pd.read_csv('/Users/macbookpro/Desktop/Tweeter_Sentiment_Analysis/doge_to_moon.csv')
+        data = pd.read_csv(p.path1)
     else:
         st.text('WebApp in SCRAP MODE.\nEnter the tweet information you want to scrap.')
         st.text('Be patient with Twitter API\nYou can scrap max 500 Tweets')
@@ -30,7 +31,7 @@ def runHashTagScrap(debug_mode):
         tag = st.text_input("Enter Hashtag : ")
         if tag: 
             scrap.start(tag, general.getDate(1), min(n_twts,500))
-            data = pd.read_csv('/Users/macbookpro/Desktop/Tweeter_Sentiment_Analysis/temp.csv')
+            data = pd.read_csv(p.path3)
 
 
     if not tag:
@@ -69,7 +70,7 @@ def getUserInfo():
     n_twts = st.number_input("How many tweets to Scrap : ",2)
 
     
-    userData = pd.read_csv('/Users/macbookpro/Desktop/Tweeter_Sentiment_Analysis/UserTweets.csv')
+    userData = pd.read_csv(p.path2)
     
     if userData['chk'][0]!=str(user)+str(n_twts):
     

@@ -1,6 +1,7 @@
 import pandas as pd 
 import tweepy 
 import streamlit as st
+import path as p
 
 def printtweetdata(n, ith_tweet):
     print()
@@ -57,7 +58,7 @@ def scrape(words, date_since, numtweet,api):
         printtweetdata(i, ith_tweet)
         i = i+1
         prog.progress(i/(len(list_tweets)+2))
-    filename = '/Users/macbookpro/Desktop/Tweeter_Sentiment_Analysis/temp.csv'
+    filename = p.path3
       
     db.to_csv(filename)
     print('Scraping has completed!')
