@@ -106,6 +106,9 @@ def drawUserSentiments(sentiments):
     sns.distplot(ax=axes[1], a=sentiments['neg'],color='r',axlabel = 'Negative Index').set_title('Negative')
     st.pyplot(fig2)
 
-
+st.cache(suppress_st_warning=True)
+def drawUserWordCloud(cleanData):
+    postves = general.getTop(min(len(cleanData),30),'text',cleanData)
+    general.showWordCloud(postves,'POSITIVE')
 
 
