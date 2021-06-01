@@ -91,7 +91,7 @@ def getUserInfo():
 
         elif usrAnalysis == 'Overall Sentiment of user':
             drawings.drawUserSentiments(usrSentiments)
-            drawings.drawUserWordCloud(uData)
+            drawings.drawUserWordCloud(uData,'text')
     else:pass
         
 def getReplies():
@@ -99,13 +99,41 @@ def getReplies():
     
     URL = st.text_input("Enter URL: ")
 
-    url = open(p.URL_path, "wt")
-    url.write(URL)
-    url.close()
+    if URL:
+        with open (p.URL_path, "r") as myfile:
+            dta = myfile.read()
+        
+        if dta != URL:
 
-    cmd='python3 twitter-scraper.py -f url.txt'
+            dlg = st.text('Getting Tweet Replies')
 
-    os.system(cmd)
+            url = open(p.URL_path, "wt")
+            url.write(URL)
+            url.close()
 
-    rplys = pd.read_csv(p.rply_path)
-    st.write(rplys)
+            cmd=f'python3 {p.rply_scrap_file} -f url.txt'
+
+            os.system(cmd)
+
+            rplyData = pd.read_csv(p.rply_path)
+
+            dlg.empty()
+
+        else:
+            rplyData = pd.read_csv(p.rply_path)
+            
+        rplyAnalysis = st.selectbox('Select Analytics',
+            ['Show Raw Data','Overall Sentiment of user'])  
+
+        try:
+            usrSentiments = pd.DataFrame(data = general.getSentiment(rplyData['Reply']),columns = ['neg','neu','pos','comp'])
+        except:
+            st.write('Unexpected Error Try Again...')
+
+        if rplyAnalysis == 'Show Raw Data':
+            drawings.showUserData(rplyData)
+
+        elif rplyAnalysis == 'Overall Sentiment of user':
+            drawings.drawUserSentiments(usrSentiments)
+            drawings.drawUserWordCloud(rplyData,'Reply')
+    else:pass

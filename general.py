@@ -94,7 +94,7 @@ def getSentiment(data):
 def getTop(nTweets,sent,data):
   d = data.sort_values(by=sent,ascending=False)
   sent_score = []; twit = []
-  for sent,tex in zip(d[sent].values,d['text'].values):
+  for sent,tex in zip(d[sent].values,d[sent].values):
     if tex not in twit:
       sent_score.append(sent)
       twit.append(tex)

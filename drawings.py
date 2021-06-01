@@ -107,8 +107,8 @@ def drawUserSentiments(sentiments):
     st.pyplot(fig2)
 
 st.cache(suppress_st_warning=True)
-def drawUserWordCloud(cleanData):
-    postves = general.getTop(min(len(cleanData),30),'text',cleanData)
-    general.showWordCloud(postves,'POSITIVE')
+def drawUserWordCloud(cleanData,col):
+    postves = general.getTop(min(len(cleanData),30),col,cleanData)
+    general.showWordCloud(postves,col)
 
 
