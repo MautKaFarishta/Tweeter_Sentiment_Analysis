@@ -13,7 +13,7 @@ import os
 
 def runHashTagScrap(debug_mode):
 
-    st.title('Tweeter Sentiment Analysis')
+    st.title('Twitter Sentiment Analysis')
 
     dialogue = st.text("FOR EDUCATIONAL PURPOSE ONLY")
 
@@ -65,6 +65,10 @@ def runHashTagScrap(debug_mode):
 
 def getUserInfo():
 
+    st.title('Twitter Sentiment Analysis')
+
+    st.write('Scrap tweets of specific user.')
+
     user = st.text_input("Enter Username: ")
 
     n_twts = st.number_input("How many tweets to Scrap : ",2)
@@ -95,6 +99,10 @@ def getUserInfo():
     else:pass
         
 def getReplies():
+
+    st.title('Twitter Sentiment Analysis')
+
+    st.write('Scrap replies of specific tweet.')
     st.write('Enter URL of the Tweet.')
     
     URL = st.text_input("Enter URL: ")
