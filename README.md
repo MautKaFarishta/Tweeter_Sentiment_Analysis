@@ -11,3 +11,7 @@ path3='/home/fiery-harry/Documents/python/streamlit/Tweeter_Sentiment_Analysis/t
 add dependancies:
 sudo pip3 install python-twitter
 sudo pip3 install pytz
+
+Finally run code with following command 
+
+streamlit run .../main.py
