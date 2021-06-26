@@ -29,7 +29,7 @@ def runHashTagScrap(debug_mode):
         n_twts = st.number_input("How many tweets to Scrap : ",10)
         
         tag = st.text_input("Enter Hashtag : ")
-        if tag: 
+        if st.button('SCRAP'): 
             scrap.start(tag, general.getDate(1), min(n_twts,500))
             data = pd.read_csv(p.path3)
 
