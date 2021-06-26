@@ -30,8 +30,8 @@ def runHashTagScrap(debug_mode):
         
         tag = st.text_input("Enter Hashtag : ")
         if tag: 
-            scrap.start(tag, general.getDate(1), min(n_twts,500))
-            data = pd.read_csv(p.path3)
+            data = scrap.start(tag, general.getDate(1), min(n_twts,500))
+            # data = pd.read_csv(p.path3)
 
 
     if not tag:

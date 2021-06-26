@@ -60,11 +60,11 @@ def scrape(words, date_since, numtweet,api):
         prog.progress(i/(len(list_tweets)+2))
     filename = p.path3
       
-    db.to_csv(filename)
+    # db.to_csv(filename)
     print('Scraping has completed!')
     msg.empty()
     prog.empty()
-    # return db
+    return db
   
   
 def start(tag,date_since,numtweets):
