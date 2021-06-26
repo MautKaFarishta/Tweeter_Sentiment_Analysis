@@ -11,9 +11,9 @@ from collections import Counter
 from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
 # nltk.download()
-# nltk.download('stopwords')
-# nltk.download('punkt')
-# nltk.download('vader_lexicon')
+nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('vader_lexicon')
 
 @st.cache(suppress_st_warning=True)  
 def getDate(d):
