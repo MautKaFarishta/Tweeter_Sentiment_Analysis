@@ -60,16 +60,16 @@ def drawMap(data):
     st.map(lat_long)
 
 def drawMostLocations(most,data):
-        st.subheader('LocationWise Tweets')
-        location_grp=data.groupby(by=['location'])
-        lob = location_grp['text'].count()
-        lob_sorted = lob.sort_values(ascending=False)
-        plt.rcdefaults()
-        plt.style.use('fivethirtyeight')
-        fig1 = plt.figure(figsize=(20,15))
-        plt.barh(lob_sorted.index[:most],lob_sorted.values[:most])
-        plt.title("Locationwise Number of tweets")
-        st.pyplot(fig1)
+    st.subheader('LocationWise Tweets')
+    location_grp=data.groupby(by=['location'])
+    lob = location_grp['text'].count()
+    lob_sorted = lob.sort_values(ascending=False)
+    plt.rcdefaults()
+    plt.style.use('fivethirtyeight')
+    fig1 = plt.figure(figsize=(20,15))
+    plt.barh(lob_sorted.index[:most],lob_sorted.values[:most])
+    plt.title("Locationwise Number of tweets")
+    st.pyplot(fig1)
 
 st.cache(suppress_st_warning=True)
 def showUser(data):
