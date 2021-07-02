@@ -3,7 +3,7 @@ import tweepy
 import streamlit as st
 import path as p
 
-@st.cache(suppress_st_warning=True)  
+# @st.cache(suppress_st_warning=True)  
 def scrape(words, date_since, numtweet,api):
 
     msg = st.text(f'Scraping Tweets for {words}')
