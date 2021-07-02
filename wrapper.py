@@ -79,7 +79,7 @@ def getUserInfo():
         if (userData.empty) or (userData['chk'][0]!=str(user)+str(n_twts)):
         
             userData = scrapUser.start(user, n_twts)
-            userData = pd.read_csv(p.path2)
+            # userData = pd.read_csv(p.path2)
 
         usrAnalysis = st.selectbox('Select Analytics',
             ['Show Raw Data','Overall Sentiment of user'])  

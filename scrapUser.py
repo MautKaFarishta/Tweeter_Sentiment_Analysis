@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 import path as p
 
-st.cache(suppress_st_warning=False)
+# st.cache(suppress_st_warning=False)
 def scrapUser(username,count,api):
 
       count = min(100,count)
@@ -26,10 +26,12 @@ def scrapUser(username,count,api):
 
       filename = p.path2
 
-      tweets_df.to_csv(filename)
+    #  tweets_df.to_csv(filename)
+      
       dilog.empty()
       
       print('Scraping For User has completed!')
+      return tweets_df
 
 def start(username,count):
     consumer_key = 'XBOMTUDVy5b0zOdWqRWYJuGkw'
